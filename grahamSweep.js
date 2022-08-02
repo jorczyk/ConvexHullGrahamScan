@@ -12,19 +12,48 @@ function getStartingPoint(points) {
             biggestYPointIndex = i;
         }
     }
-    var newPoints = points;
-    newPoints.splice(biggestYPointIndex,1);
-    biggestYPoint.color("#ebdb34");
-    return [biggestYPoint, newPoints];
+    return [biggestYPoint, biggestYPointIndex];
+}
+
+function setStartingPoint(point, convexHull) {
+    point.color("#ebdb34");
+    convexHull[0] = startingPoint;
+}
+
+function popFirstPoint(points, index) {
+    // var newPoints = ;
+    points.splice(index,1);
+}
+
+function calculateCosineForReminingPoints(points, startingPoint) {
+    points.forEach(point => {
+        point.calculateCosine(startingPoint);
+    });
+}
+
+function prepareRemainingPoints(points, startingPoint) {
+    calculateCosineForReminingPoints(points, startingPoint);
+    sortPointsByCosine(startingPoint, points);
+    removeSameAngledPoints(points, startingPoint);
+    return points;
+}
+
+function pushTwoFirstPoints(convexHull, remainingPoints) {
+    convexHull.push(remainingPoints[0]);
+    convexHull.push(remainingPoints[1]);
+    remainingPoints[0].color("#03f0fc");
+    remainingPoints[1].color("#03f0fc");
 }
 
 function calculateGrahamSweep(points, stepByStep) {
-    console.log(`Initial points: ${points.length}`)
     var convexHull = [];
     var startingPointResult = getStartingPoint(points);
     var startingPoint = startingPointResult[0]
+    var startingPointIndex = startingPointResult[1]
     convexHull[0] = startingPoint;
-    var remainingPoints = startingPointResult[1];
+    var remainingPoints = points;
+    points.splice(startingPointIndex,1);
+    // popFirstPoint(remainingPoints, startingPointIndex);
     remainingPoints.forEach(element => {
         element.calculateCosine(startingPoint);
     });
@@ -37,10 +66,7 @@ function calculateGrahamSweep(points, stepByStep) {
         alert("Cannot create convex hull from less than 3(4) points");
     }
 
-    convexHull.push(remainingPoints[0]);
-    convexHull.push(remainingPoints[1]);
-    remainingPoints[0].color("#03f0fc");
-    remainingPoints[1].color("#03f0fc");
+    pushTwoFirstPoints(convexHull, remainingPoints);
 
     var i = 2;
     var n = remainingPoints.length;
