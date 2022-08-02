@@ -15,6 +15,14 @@ class ConvexHull{
         return this.points[index];
     }
 
+    getLast() {
+        return this.points[this.points.length-1];
+    }
+
+    getSecondToLast() {
+        return this.points[this.points.length-2];
+    }
+
     length() {
         return this.points.lenght;
     }

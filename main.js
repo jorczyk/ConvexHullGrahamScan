@@ -13,6 +13,6 @@ function drawPoints(canvas, points, withText) {
     });
 }
 
-const points = getNRandomPoints(canvas, 20, 10);
+const points = getNRandomPoints(canvas, 400, 10);
 drawPoints(canvas, points, false);
-var convexHullPoints = calculateGrahamSweep(points, true);
+var convexHullPoints = calculateGrahamSweep(points, false);
