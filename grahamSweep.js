@@ -79,7 +79,7 @@ function calculateGrahamSweep(points, stepByStep) {
                 convexHull.forEach(element => {element.color("#FF0000");})
                 console.log(convexHull);
                 var convexHullObject = new ConvexHull(convexHull);
-                convexHullObject.draw(context);
+                convexHullObject.drawComplete(context);
             }
         }, false);
     } else {
@@ -109,7 +109,7 @@ function calculateGrahamSweep(points, stepByStep) {
         convexHull.forEach(element => {element.color("#FF0000");})
         console.log(convexHull);
         var convexHullObject = new ConvexHull(convexHull);
-        convexHullObject.draw(context);
+        convexHullObject.drawComplete(context);
     }
     return convexHull;
 }
@@ -123,12 +123,6 @@ function sortPointsByCosine(startingPoint, points) {
         if (first.cosine < second.cosine) {
            return 1;
         }
-        // if (first.calculateDistance(startingPoint) < second.calculateDistance(startingPoint)) {
-        //     return -1;
-        // }
-        // if (first.calculateDistance(startingPoint) > second.calculateDistance(startingPoint)) {
-        //     return 1;
-        // }
         return 0;
      });
 }

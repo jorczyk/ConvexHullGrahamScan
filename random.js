@@ -1,5 +1,4 @@
 function getRandomPoint(canvas, size) {
-    // var radius = Math.min(canvas.width, canvas.height)/3;
     var centerX = canvas.width/2;
     var centerY = canvas.height/2;
     var constantX = canvas.width/2.5;
@@ -12,7 +11,6 @@ function getRandomPoint(canvas, size) {
 
     var x = getRandomInt(x_min, x_max);
     var y = getRandomInt(y_min, y_max);
-    // console.log(`x: ${x}, y: ${y}`)
     return new Point(x, y, size);
 }
 
@@ -23,8 +21,4 @@ function getNRandomPoints(canvas, n, size) {
     }
     console.log(generatedPoints);
     return generatedPoints;
-}
-
-function deduplicatePoints(points) {
-    // TODO
 }
